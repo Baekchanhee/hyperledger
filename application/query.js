@@ -8,7 +8,7 @@ const { FileSystemWallet, Gateway } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
 
-const ccpPath = path.resolve(__dirname, '..', '..', 'network', 'connection.json');
+const ccpPath = path.resolve(__dirname, '..', 'network', 'connection.json');
 const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 const ccp = JSON.parse(ccpJSON);
 
@@ -38,19 +38,14 @@ async function main() {
         // Get the contract from the network.
         const contract = network.getContract('mycc');
 
-        // Submit the specified transaction.
-        // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-        // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
-        await contract.submitTransaction('createBlood', 'BLOOD0', '전혈', '200', 'A', 'minji');
-        //await contract.submitTransaction('initLedger');
-        // Kind: "전혈", Volume: "200", Type: "A", Owner: "Tomy"
-        console.log('Transaction has been submitted');
-
-        // Disconnect from the gateway.
-        await gateway.disconnect();
+        // Evaluate the specified transaction.
+        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
+        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
+        const result = await contract.evaluateTransaction('queryAllBloods');
+        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
     } catch (error) {
-        console.error(`Failed to submit transaction: ${error}`);
+        console.error(`Failed to evaluate transaction: ${error}`);
         process.exit(1);
     }
 }

@@ -50,12 +50,12 @@ app.get('/api/query', async function (req, res) {
         const network = await gateway.getNetwork('mychannel');
 
         // Get the contract from the network.
-        const contract = network.getContract('sacc');
+        const contract = network.getContract('mycc');
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('getAllKeys');
+        const result = await contract.evaluateTransaction('queryAllBloods');
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
         var obj = JSON.parse(result);
@@ -97,11 +97,11 @@ app.get('/api/querykey/:id', async function (req, res) {
         const network = await gateway.getNetwork('mychannel');
 
         // Get the contract from the network.
-        const contract = network.getContract('sacc');
+        const contract = network.getContract('mycc');
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        const result = await contract.evaluateTransaction('get', key);
+        const result = await contract.evaluateTransaction('queryBlood', key);
 
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
@@ -147,13 +147,13 @@ app.post('/api/createkey/', async function (req, res) {
         const network = await gateway.getNetwork('mychannel');
 
         // Get the contract from the network.
-        const contract = network.getContract('sacc');
+        const contract = network.getContract('mycc');
 
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
 //        await contract.submitTransaction('createCar', 'CAR11', 'Hnda', 'Aord', 'Bla', 'Tom');
-        await contract.submitTransaction('set', key, value);
+        await contract.submitTransaction('createBlood', key, value);
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
