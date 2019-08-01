@@ -124,7 +124,10 @@ app.get('/api/createkey', function (req, res) {
 app.post('/api/createkey/', async function (req, res) {
     try {
 	var key = req.body.key;
-	var value = req.body.value;
+    var kind = req.body.kind;
+    var volume = req.body.volume;
+    var type = req.body.type;
+    var owner = req.body.owner;
 
 
         // Create a new file system based wallet for managing identities.
@@ -153,7 +156,7 @@ app.post('/api/createkey/', async function (req, res) {
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
 //        await contract.submitTransaction('createCar', 'CAR11', 'Hnda', 'Aord', 'Bla', 'Tom');
-        await contract.submitTransaction('createBlood', key, value);
+        await contract.submitTransaction('createBlood', key, kind, volume, type, owner);
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
