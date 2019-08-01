@@ -101,7 +101,7 @@ app.get('/api/querykey/:id', async function (req, res) {
 
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        const result = await contract.evaluateTransaction('queryBlood', key);
+        const result = await contract.evaluateTransaction('queryBlood', onwer);
 
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
