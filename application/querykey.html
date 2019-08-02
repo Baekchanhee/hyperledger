@@ -1,9 +1,20 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-     <!-- jQuery AJAX -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <!--부트스트랩 CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!-- jQuery AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
+
   <script type="text/javascript">
     $(document).ready(function(){
       $('#div1').hide();
@@ -11,35 +22,56 @@
       $("button").click(function (){
         var id = $("#owner").val();
         console.log(id);
-
         $('#div1').show();
         
         var url = "../../api/querykey/"+id;
         $.get(url, function(data, status){
-          $("#div2 *").remove();
-          $("#div2").append(data);
+          $("#tbody *").remove();
+          $("#tbody").append(data);
         });
       });
     });
     
-
   </script>
 
   <title>내 소유 헌혈증 확인하기</title>
 </head>
+
 <body>
+<div class="container theme-showcase" role="main">
   <h1>내 소유 헌혈증 확인하기</h1>
   <hr />
     <table>
       <tr>
         <td><label>소유자</label></td>
-        <td><input id="owner" type="text" name="owner" /><button>검색</button></td>
+        <td><input id="owner" type="text" name="owner" placeholder="이름" /><button class="btn btn-info">검색</button> <a href="http://localhost:8080" class="btn btn-info" style="padding-right">취소</a></td>
       </tr>
       
 
     </table>
 
+    
   <div id="div1"><h2>소유자의 헌혈증 정보</h2></div>
-  <div id="div2"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>증서번호</th>
+            <th>종류</th>
+            <th>혈액량</th>
+            <th>혈액형</th>
+            <th>소유자 변경</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbody">
+                  
+        </tbody>
+      </table>
+    </div>    
+  </div>
+
+</div>
 </body>
 </html>

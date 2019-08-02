@@ -106,8 +106,7 @@ app.get('/api/querykey/:id', async function (req, res) {
         //console.log("result는"+obj);
         var jsonobj = JSON.parse(result);
         console.log("jsonOBj는"+jsonobj);
-        var lists = '<table id="table-1" cellspacing="0" cellpadding="2">'
-        lists += '<th>증서번호</th><th>헌혈종류</th><th>혈액량</th><th>혈액형</th><th>소유자 변경</th>'
+        var lists = ''
         for(var i = 0; i < jsonobj.length; i++){
             //var obj = JSON.parse(result[i]);
             var obj = jsonobj[i];
@@ -116,7 +115,7 @@ app.get('/api/querykey/:id', async function (req, res) {
             
             if(obj.Record.owner == key){
                 //lists += '<tr id='+i+'><td>증서번호</td><td>'+obj.Key+'</td><td>헌혈종류</td><td>'+obj.Record.kind+'</td><td>혈액량</td><td>'+obj.Record.volume+'</td><td>혈액형</td><td>'+obj.Record.type+'</td><td><input type="button" value="소유자 변경" onClick="window.open("http://www.daum.net")"></td></tr>'
-                lists += '<tr id='+i+'><td>'+obj.Key+'</td><td>'+obj.Record.kind+'</td><td>'+obj.Record.volume+'</td><td>'+obj.Record.type+'</td><td><input type="button" value="send" onClick="window.open('+"'http://localhost:8000/api/send?id="+obj.Key+"'"+')"></td></tr>'
+                lists += '<tr id='+i+'><td>'+obj.Key+'</td><td>'+obj.Record.kind+'</td><td>'+obj.Record.volume+'</td><td>'+obj.Record.type+'</td><td><input type="button" value="send" onClick="window.open('+"'http://localhost:8080/api/send?id="+obj.Key+"'"+')"></td></tr>'
                 //<button onclick="window.open('http://localhost:8000/api/send?id='+obj.Key','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">button</button>
             }
         }
