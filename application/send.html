@@ -1,0 +1,59 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>헌혈증 소유권 이전</title>
+</head>
+<body>
+    
+        <table>
+          <tr>
+            <td><label>받는 이</label></td>
+            <td><input type="text" id="owner" /></td>
+          </tr>
+         
+            
+          
+          
+         
+          
+        </table>
+        <input type="hidden" id="key" >
+        <button id="sendBtn">send</button>
+     
+
+
+      <script>
+        function CloseWindow(){
+                        self.opener = self;
+                        window.close();
+                    }
+        
+        $(document).ready(function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var bloodkey = urlParams.get('id');
+            console.log(bloodkey);
+            $('#key').val(bloodkey);
+        });
+        
+        
+       
+        $("#sendBtn").click(function(){
+            $.ajax({
+                url:'http://localhost:8000/api/send',
+                type : 'POST',
+                data : {
+                    
+                    owner : $("#owner").val(),
+                    key : $("#key").val(),
+                    
+                },
+                success:function(data){
+                    console.log(data)
+                    CloseWindow();
+                }
+            })
+            
+        });
+    </script>
+</body>
+</html>

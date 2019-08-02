@@ -3,11 +3,11 @@
 <head>
      <!-- jQuery AJAX -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
     $(document).ready(function(){
       $('#div1').hide();
-      
+      $("#table-1").tableDnD();
       $("button").click(function (){
         var id = $("#owner").val();
         console.log(id);
@@ -16,7 +16,8 @@
         
         var url = "../../api/querykey/"+id;
         $.get(url, function(data, status){
-          $("#div2").text(JSON.stringify(data));
+          $("#div2 *").remove();
+          $("#div2").append(data);
         });
       });
     });
@@ -32,9 +33,9 @@
     <table>
       <tr>
         <td><label>소유자</label></td>
-        <td><input id="owner" type="text" name="owner" /></td>
+        <td><input id="owner" type="text" name="owner" /><button>검색</button></td>
       </tr>
-      <tr><td><button>소유자 변경</button></td></tr>
+      
 
     </table>
 
