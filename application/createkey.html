@@ -2,35 +2,83 @@
 <html>
 <head>
   <title>전자 헌혈증 등록</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
   <h1>전자 헌혈증 등록</h1>
   <hr />
-  <form method="post">
+  
     <table>
       <tr>
         <td><label>등록번호</label></td>
-        <td><input type="text" name="key" /></td>
+        <td><input type="text" id="key" name="key" /></td>
       </tr>
       <tr>
         <td><label>종류</label></td>
-        <td><input type="text" name="kind" /></td>
+        <td><input type="text" id="kind" name="kind" /></td>
       </tr>
       <tr>
         <td><label>혈액량</label></td>
-        <td><input type="text" name="volume" /></td>
+        <td><input type="text" id="volume" name="volume" /></td>
       </tr>
       <tr>
         <td><label>혈액형</label></td>
-        <td><input type="text" name="type" /></td>
+        <td><input type="text" id="type" name="type"/></td>
       </tr>
       <tr>
         <td><label>소유자</label></td>
-        <td><input type="text" name="owner" /></td>
+        <td><input type="text" id="owner" name="owner" /></td>
       </tr>
       
     </table>
-   <input type="submit" name="" />
-  </form>
+    <button id="enrollBtn">등록</button>
+  
+
+
+   <script>
+    function CloseWindow(){
+                    self.opener = self;
+                    window.close();
+                }
+    
+    
+    
+    
+   
+    $("#enrollBtn").click(function(){
+        $.ajax({
+            url:'http://localhost:8000/api/createkey/',
+            type : 'POST',
+            data : {
+                kind : $("#kind").val(),
+                owner : $("#owner").val(),
+                key : $("#key").val(),
+                volume : $("#volume").val(),
+                type : $("#type").val(),   
+                
+            },
+            success:function(data){
+                console.log(data)
+                /*
+                $('input[name=kind]').attr('value','')
+                $('input[name=owner]').attr('value','')
+                $('input[name=key]').attr('value','')
+                $('input[name=volume]').attr('value','')
+                $('input[name=type]').attr('value','')
+                */
+
+                $("#kind").val(''),
+                $("#owner").val(''),
+                $("#key").val(''),
+                $("#volume").val(''),
+                $("#type").val(''),
+                alert("등록에 성공하셨습니다.");
+                
+   
+            }
+        })
+        
+    });
+</script>
 </body>
 </html>
