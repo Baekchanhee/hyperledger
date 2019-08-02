@@ -3,17 +3,18 @@
 <head>
   <title>전자 헌혈증 등록</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
    <!--부트스트랩 CDN-->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
+
+
 </head>
 <body>
   <h1>전자 헌혈증 등록</h1>
   <hr />
-  
-  
+ 
     <table>
       <tr>
         <td><label>등록번호</label></td>
@@ -37,9 +38,11 @@
       </tr>
       
     </table>
+
   
     <button id="enrollBtn" class="btn btn-info">등록</button>
     <a href="http://localhost:8080" class="btn btn-info">취소</a>
+
   
 
 
@@ -55,7 +58,9 @@
    
     $("#enrollBtn").click(function(){
         $.ajax({
+
             url:'http://localhost:8080/api/createkey/',
+
             type : 'POST',
             data : {
                 kind : $("#kind").val(),
@@ -74,6 +79,8 @@
                 $('input[name=volume]').attr('value','')
                 $('input[name=type]').attr('value','')
                 */
+
+
                 $("#kind").val(''),
                 $("#owner").val(''),
                 $("#key").val(''),
